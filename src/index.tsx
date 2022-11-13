@@ -1,15 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+
+const queryClient = new QueryClient();
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  uri: "https://beta.pokeapi.co/graphql/v1beta",
+});
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <ApolloProvider client={client}>
+          <App />
+        </ApolloProvider>
+      </BrowserRouter>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 
