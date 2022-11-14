@@ -12,16 +12,18 @@ import {
   Label,
   Info,
 } from "./style";
+import LoadingProfilePicture from "../../components/Skeletons/LoadingProfilePicture";
+import LoadingDetailBox from "../../components/Skeletons/LoadingDetailBox";
+
+// description: pokemon_v2_characteristic(where: {id: {_eq: ${id}}}) {
+//       pokemon_v2_characteristicdescriptions(where: {language_id: {_eq: 9}}) {
+//         description
+//         language_id
+//       }
+//     }
 
 const PokemonDetail = () => {
   let { id, pokemon } = useParams();
-
-  // description: pokemon_v2_characteristic(where: {id: {_eq: ${id}}}) {
-  //       pokemon_v2_characteristicdescriptions(where: {language_id: {_eq: 9}}) {
-  //         description
-  //         language_id
-  //       }
-  //     }
 
   const GET_POKEMON_BY_ID = gql`
     query GetPokemonById {
@@ -49,7 +51,6 @@ const PokemonDetail = () => {
 
   const { loading, error, data } = useQuery(GET_POKEMON_BY_ID);
 
-  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
   const image = data
@@ -59,51 +60,60 @@ const PokemonDetail = () => {
 
   return (
     <Wrapper>
-      <PictureWrapper>
-        <ProfilePicture src={image} />
-      </PictureWrapper>
-      <div>
-        <Title>
-          {pokemon}{" "}
-          <Index>#{("000" + data?.pokemon?.[0]?.id).substr(-3)}</Index>
-        </Title>
-        <Stats>
-          <Description>
-            When the bulb on its back grows large, it appears to lose the
-            ability to stand on its hind legs.
-          </Description>
-          <InfoBox>
-            <div>
-              {data?.pokemon?.[0]?.height && (
-                <Info>
-                  <Label>Height</Label>
-                  <span>{data?.pokemon?.[0]?.height}'</span>
-                </Info>
-              )}
-              {data?.pokemon?.[0]?.weight && (
-                <Info>
-                  <Label>Weight</Label>
-                  <span>{data?.pokemon?.[0]?.weight} lbs</span>
-                </Info>
-              )}
-            </div>
-            <div>
-              {data?.pokemon?.[0]?.abilities?.length && (
-                <Info>
-                  <Label>Abilities</Label>
-                  {data?.pokemon?.[0]?.abilities?.map(
-                    (ability: any, i: number) => (
-                      <span key={i}>
-                        {ability?.ability?.name?.replace("-", " ")}
-                      </span>
-                    )
+      {loading ? (
+        <>
+          <LoadingProfilePicture />
+          <LoadingDetailBox />
+        </>
+      ) : (
+        <>
+          <PictureWrapper>
+            <ProfilePicture src={image} />
+          </PictureWrapper>
+          <div>
+            <Title>
+              {pokemon}{" "}
+              <Index>#{("000" + data?.pokemon?.[0]?.id).substr(-3)}</Index>
+            </Title>
+            <Stats>
+              <Description>
+                When the bulb on its back grows large, it appears to lose the
+                ability to stand on its hind legs.
+              </Description>
+              <InfoBox>
+                <div>
+                  {data?.pokemon?.[0]?.height && (
+                    <Info>
+                      <Label>Height</Label>
+                      <span>{data?.pokemon?.[0]?.height}'</span>
+                    </Info>
                   )}
-                </Info>
-              )}
-            </div>
-          </InfoBox>
-        </Stats>
-      </div>
+                  {data?.pokemon?.[0]?.weight && (
+                    <Info>
+                      <Label>Weight</Label>
+                      <span>{data?.pokemon?.[0]?.weight} lbs</span>
+                    </Info>
+                  )}
+                </div>
+                <div>
+                  {data?.pokemon?.[0]?.abilities?.length && (
+                    <Info>
+                      <Label>Abilities</Label>
+                      {data?.pokemon?.[0]?.abilities?.map(
+                        (ability: any, i: number) => (
+                          <span key={i}>
+                            {ability?.ability?.name?.replace("-", " ")}
+                          </span>
+                        )
+                      )}
+                    </Info>
+                  )}
+                </div>
+              </InfoBox>
+            </Stats>
+          </div>
+        </>
+      )}
     </Wrapper>
   );
 };

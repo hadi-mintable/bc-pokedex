@@ -5,6 +5,7 @@ export const Wrapper = styled.section`
   flex-direction: row;
   gap: 2.5rem;
   padding: 30px 0;
+  width: 100%;
 `;
 
 export const PictureWrapper = styled.div`
@@ -44,7 +45,7 @@ export const Description = styled.p`
 `;
 
 export const InfoBox = styled.div`
-  background-color: #30a7d7;
+  background-color: #30a7bd;
   color: #fff;
   padding: 1.25rem;
   border-radius: 10px;

@@ -1,10 +1,5 @@
-import styled, { keyframes, css } from "styled-components";
-
-const shine = keyframes`
-  to {
-      background-position-x: -300%;
-    }
-`;
+import styled, { css } from "styled-components";
+import { shine } from "../style";
 
 export const PokeCardWrapper = styled.div`
   display: flex;

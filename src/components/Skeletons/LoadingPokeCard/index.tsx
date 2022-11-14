@@ -1,4 +1,5 @@
-import { PokeCardWrapper, ImgWrapper, Detail, TextShine } from "./style";
+import { PokeCardWrapper, ImgWrapper, Detail } from "./style";
+import { TextShine } from "../style";
 
 const LoadingPokeCard = () => {
   return (
