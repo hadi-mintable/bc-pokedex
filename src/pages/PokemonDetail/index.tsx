@@ -1,37 +1,13 @@
-import styled from "styled-components";
 import { useQuery, gql } from "@apollo/client";
 import { useParams } from "react-router-dom";
-
-const Wrapper = styled.section`
-  display: flex;
-  flex-direction: row;
-  gap: 2rem;
-`;
-
-const PictureWrapper = styled.div`
-  aspect-ratio: 1/1;
-  height: 300px;
-  background: #e6e6e6;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const ProfilePicture = styled.img`
-  object-fit: cover;
-  height: 200px;
-`;
-
-const Title = styled.h1`
-  color: #212121;
-  font-size: 36px;
-  text-transform: capitalize;
-  margin-top: 0;
-`;
-
-const Index = styled.span`
-  color: #616161;
-`;
+import {
+  Wrapper,
+  PictureWrapper,
+  ProfilePicture,
+  Title,
+  Index,
+  Stats,
+} from "./style";
 
 const PokemonDetail = () => {
   let { id, pokemon } = useParams();
@@ -66,9 +42,17 @@ const PokemonDetail = () => {
       <PictureWrapper>
         <ProfilePicture src={image} />
       </PictureWrapper>
-      <Title>
-        {pokemon} <Index>#{("000" + data?.pokemon?.[0]?.id).substr(-3)}</Index>
-      </Title>
+      <div>
+        <Title>
+          {pokemon}{" "}
+          <Index>#{("000" + data?.pokemon?.[0]?.id).substr(-3)}</Index>
+        </Title>
+        <Stats>
+          {data?.pokemon?.[0]?.height && (
+            <span>{data?.pokemon?.[0]?.height}</span>
+          )}
+        </Stats>
+      </div>
     </Wrapper>
   );
 };
