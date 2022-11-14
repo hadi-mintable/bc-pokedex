@@ -1,12 +1,16 @@
 import { Outlet } from "react-router-dom";
-import { Container, Header, Main } from "./style";
+import { Container, Header, Main, HeaderLink, Clone } from "./style";
 
 const Layout = () => {
   return (
     <>
       <Header>
         <Container>
-          <h1>pokedex</h1>
+          <HeaderLink to="/">
+            <h1>
+              pokedex<Clone>.clone</Clone>
+            </h1>
+          </HeaderLink>
         </Container>
       </Header>
       <Main>

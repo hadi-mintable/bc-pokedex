@@ -7,10 +7,21 @@ import {
   Title,
   Index,
   Stats,
+  Description,
+  InfoBox,
+  Label,
+  Info,
 } from "./style";
 
 const PokemonDetail = () => {
   let { id, pokemon } = useParams();
+
+  // description: pokemon_v2_characteristic(where: {id: {_eq: ${id}}}) {
+  //       pokemon_v2_characteristicdescriptions(where: {language_id: {_eq: 9}}) {
+  //         description
+  //         language_id
+  //       }
+  //     }
 
   const GET_POKEMON_BY_ID = gql`
     query GetPokemonById {
@@ -21,6 +32,16 @@ const PokemonDetail = () => {
         weight
         pokemon_v2_pokemonsprites {
           sprites
+        }
+        pokemon_type: pokemon_v2_pokemontypes {
+          pokemon_v2_type {
+            name
+          }
+        }
+        abilities: pokemon_v2_pokemonabilities {
+          ability: pokemon_v2_ability {
+            name
+          }
         }
       }
     }
@@ -37,6 +58,8 @@ const PokemonDetail = () => {
     data?.pokemon?.[0]?.pokemon_v2_pokemonsprites?.[0]?.sprites
   )?.front_default;
 
+  console.log(data?.pokemon?.[0]?.abilities);
+
   return (
     <Wrapper>
       <PictureWrapper>
@@ -48,9 +71,36 @@ const PokemonDetail = () => {
           <Index>#{("000" + data?.pokemon?.[0]?.id).substr(-3)}</Index>
         </Title>
         <Stats>
-          {data?.pokemon?.[0]?.height && (
-            <span>{data?.pokemon?.[0]?.height}</span>
-          )}
+          <Description>
+            When the bulb on its back grows large, it appears to lose the
+            ability to stand on its hind legs.
+          </Description>
+          <InfoBox>
+            <div>
+              {data?.pokemon?.[0]?.height && (
+                <Info>
+                  <Label>Height</Label>
+                  <span>{data?.pokemon?.[0]?.height}'</span>
+                </Info>
+              )}
+              {data?.pokemon?.[0]?.weight && (
+                <Info>
+                  <Label>Weight</Label>
+                  <span>{data?.pokemon?.[0]?.weight} lbs</span>
+                </Info>
+              )}
+            </div>
+            <div>
+              {data?.pokemon?.[0]?.abilities?.length && (
+                <Info>
+                  <Label>Abilities</Label>
+                  {data?.pokemon?.[0]?.abilities?.map((ability: any) => (
+                    <span>{ability?.ability?.name?.replace("-", " ")}</span>
+                  ))}
+                </Info>
+              )}
+            </div>
+          </InfoBox>
         </Stats>
       </div>
     </Wrapper>

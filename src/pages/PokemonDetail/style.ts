@@ -3,12 +3,13 @@ import styled from "styled-components";
 export const Wrapper = styled.section`
   display: flex;
   flex-direction: row;
-  gap: 2rem;
+  gap: 2.5rem;
+  padding: 30px 0;
 `;
 
 export const PictureWrapper = styled.div`
   aspect-ratio: 1/1;
-  height: 300px;
+  height: 375px;
   background: #e6e6e6;
   display: flex;
   align-items: center;
@@ -33,6 +34,47 @@ export const Index = styled.span`
 
 export const Stats = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   gap: 2rem;
+`;
+
+export const Description = styled.p`
+  font-size: 1.125rem;
+  margin: 0;
+`;
+
+export const InfoBox = styled.div`
+  background-color: #30a7d7;
+  color: #fff;
+  padding: 1.25rem;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 430px;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+`;
+
+export const Label = styled.div`
+  display: flex;
+  color: white;
+  font-weight: bold;
+`;
+
+export const Info = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  span {
+    color: #212121;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
 `;

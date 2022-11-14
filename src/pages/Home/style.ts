@@ -7,9 +7,11 @@ export const List = styled.ul`
   justify-content: center;
   height: 100%;
   padding-left: 0;
+  margin-bottom: 0;
 `;
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 3rem;
 `;

@@ -5,7 +5,12 @@ export type Types =
   | "bug"
   | "water"
   | "poison"
-  | "normal";
+  | "normal"
+  | "psychic"
+  | "electric"
+  | "steel"
+  | "rock"
+  | "ground";
 
 export type PokemonTypeProps = {
   type: Types;

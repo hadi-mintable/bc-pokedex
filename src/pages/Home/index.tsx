@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PokeCard from "../../components/PokeCard";
+import { LoadingPokeCards } from "../../components/Skeletons";
 import { useQuery, gql } from "@apollo/client";
 import Pagination from "rc-pagination";
 import "rc-pagination/assets/index.css";
@@ -37,31 +38,35 @@ const Home = () => {
 
   const { loading, error, data } = useQuery(GET_ALL_POKEMON);
 
-  console.log(data?.all_pokemon);
-
-  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
   return (
     <Wrapper>
-      <List>
-        {data?.all_pokemon?.map((pokemon: any) => (
-          <PokeCard key={pokemon?.id} pokemon={pokemon} />
-        ))}
-      </List>
-      <Pagination
-        showTotal={(total, range) =>
-          `${range[0]} - ${range[1]} of ${total} items`
-        }
-        // total={data?.pokemon_v2_pokemon_aggregate?.aggregate?.count}
-        total={905}
-        defaultCurrent={currentPage + 1}
-        pageSize={12}
-        onChange={(current, pageSize) => {
-          console.log({ current, pageSize });
-          setCurrentPage(current - 1);
-        }}
-      />
+      {loading ? (
+        <List>
+          <LoadingPokeCards count={itemsPerPage} />
+        </List>
+      ) : (
+        <>
+          <List>
+            {data?.all_pokemon?.map((pokemon: any) => (
+              <PokeCard key={pokemon?.id} pokemon={pokemon} />
+            ))}
+          </List>
+          <Pagination
+            showTotal={(total, range) =>
+              `${range[0]} - ${range[1]} of ${total} items`
+            }
+            // total={data?.pokemon_v2_pokemon_aggregate?.aggregate?.count}
+            total={905}
+            defaultCurrent={currentPage + 1}
+            pageSize={12}
+            onChange={(current) => {
+              setCurrentPage(current - 1);
+            }}
+          />
+        </>
+      )}
     </Wrapper>
   );
 };

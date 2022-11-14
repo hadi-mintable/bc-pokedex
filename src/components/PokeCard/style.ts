@@ -29,9 +29,9 @@ export const ImgWrapper = styled.div`
 
 export const LinkToPokeDetail = styled(Link)`
   text-decoration: none;
-  border-radius: 6px;
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   overflow: hidden;
+  border-radius: 6px;
 
   &:hover {
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),

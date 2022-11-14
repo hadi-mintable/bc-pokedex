@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Container = styled.section`
   display: flex;
@@ -16,12 +17,21 @@ export const Header = styled.header`
   position: absolute;
   top: 0;
   width: 100%;
-  // background-color: white;
   color: white;
   background-color: rgb(18, 29, 51);
 `;
 
 export const Main = styled.main`
-  padding-top: 90px;
+  padding: 90px 0 70px;
   min-height: 100vh;
+  display: flex;
+`;
+
+export const HeaderLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+`;
+
+export const Clone = styled.span`
+  color: rgb(160, 164, 171);
 `;
