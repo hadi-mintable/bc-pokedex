@@ -47,18 +47,15 @@ const PokemonDetail = () => {
     }
   `;
 
-  // find pokemon loading screen on gameboy
-
   const { loading, error, data } = useQuery(GET_POKEMON_BY_ID);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
-  const image = JSON.parse(
-    data?.pokemon?.[0]?.pokemon_v2_pokemonsprites?.[0]?.sprites
-  )?.front_default;
-
-  console.log(data?.pokemon?.[0]?.abilities);
+  const image = data
+    ? JSON.parse(data?.pokemon?.[0]?.pokemon_v2_pokemonsprites?.[0]?.sprites)
+        ?.front_default
+    : "";
 
   return (
     <Wrapper>
@@ -94,9 +91,13 @@ const PokemonDetail = () => {
               {data?.pokemon?.[0]?.abilities?.length && (
                 <Info>
                   <Label>Abilities</Label>
-                  {data?.pokemon?.[0]?.abilities?.map((ability: any) => (
-                    <span>{ability?.ability?.name?.replace("-", " ")}</span>
-                  ))}
+                  {data?.pokemon?.[0]?.abilities?.map(
+                    (ability: any, i: number) => (
+                      <span key={i}>
+                        {ability?.ability?.name?.replace("-", " ")}
+                      </span>
+                    )
+                  )}
                 </Info>
               )}
             </div>

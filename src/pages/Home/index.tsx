@@ -4,7 +4,7 @@ import { LoadingPokeCards } from "../../components/Skeletons";
 import { useQuery, gql } from "@apollo/client";
 import Pagination from "rc-pagination";
 import "rc-pagination/assets/index.css";
-import { List, Wrapper } from "./style";
+import { List, Wrapper, PaginationWrapper } from "./style";
 
 // pokemon_v2_pokemon_aggregate {
 //       aggregate {
@@ -53,18 +53,21 @@ const Home = () => {
               <PokeCard key={pokemon?.id} pokemon={pokemon} />
             ))}
           </List>
-          <Pagination
-            showTotal={(total, range) =>
-              `${range[0]} - ${range[1]} of ${total} items`
-            }
-            // total={data?.pokemon_v2_pokemon_aggregate?.aggregate?.count}
-            total={905}
-            defaultCurrent={currentPage + 1}
-            pageSize={12}
-            onChange={(current) => {
-              setCurrentPage(current - 1);
-            }}
-          />
+          <PaginationWrapper>
+            <Pagination
+              showTotal={(total, range) =>
+                `${range[0]} - ${range[1]} of ${total} items`
+              }
+              // total={data?.pokemon_v2_pokemon_aggregate?.aggregate?.count}
+              total={905}
+              defaultCurrent={currentPage + 1}
+              pageSize={12}
+              onChange={(current) => {
+                setCurrentPage(current - 1);
+                window.scrollTo(0, 0);
+              }}
+            />
+          </PaginationWrapper>
         </>
       )}
     </Wrapper>
