@@ -11,9 +11,11 @@ import {
   InfoBox,
   Label,
   Info,
+  TypeList,
 } from "./style";
 import LoadingProfilePicture from "../../components/Skeletons/LoadingProfilePicture";
 import LoadingDetailBox from "../../components/Skeletons/LoadingDetailBox";
+import PokemonType from "../../components/PokemonType";
 
 // description: pokemon_v2_characteristic(where: {id: {_eq: ${id}}}) {
 //       pokemon_v2_characteristicdescriptions(where: {language_id: {_eq: 9}}) {
@@ -52,6 +54,8 @@ const PokemonDetail = () => {
   const { loading, error, data } = useQuery(GET_POKEMON_BY_ID);
 
   if (error) return <p>Error :(</p>;
+
+  console.log(data?.pokemon[0]?.pokemon_type);
 
   const image = data
     ? JSON.parse(data?.pokemon?.[0]?.pokemon_v2_pokemonsprites?.[0]?.sprites)
@@ -110,6 +114,24 @@ const PokemonDetail = () => {
                   )}
                 </div>
               </InfoBox>
+              {data?.pokemon[0]?.pokemon_type?.length && (
+                <div>
+                  <Label>Type</Label>
+                  <TypeList>
+                    {data?.pokemon[0]?.pokemon_type?.map(
+                      (type: any, i: number) => (
+                        <li>
+                          <PokemonType
+                            key={i}
+                            type={type?.pokemon_v2_type?.name}
+                            size="md"
+                          />
+                        </li>
+                      )
+                    )}
+                  </TypeList>
+                </div>
+              )}
             </Stats>
           </div>
         </>

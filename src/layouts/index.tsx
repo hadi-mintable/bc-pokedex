@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { Outlet } from "react-router-dom";
 import {
   Container,
@@ -12,85 +12,32 @@ import {
   SuggestionsList,
   SuggestionsLink,
 } from "./style";
-import { useQuery, gql } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
+import { debounce } from "lodash";
+import { useOutsideAlerter } from "../hooks/useOutsideAlerter";
+import getPokemonBySearchTerm from "../graphql/queries/getPokemonBySearchTerm";
 
 const Layout = () => {
   const [searchValue, setSearchValue] = useState<string>("");
   const wrapperRef = useRef(null);
-  useOutsideAlerter(wrapperRef);
+  useOutsideAlerter(wrapperRef, () => setSearchValue(""));
 
-  const GET_ALL_POKEMON = gql`
-    query GetPokemonByName($searchValue: String!) {
-      pokemon: pokemon_v2_pokemon(where: { name: { _regex: $searchValue } }) {
-        name
-        id
-      }
-    }
-  `;
-
-  const { data } = useQuery(GET_ALL_POKEMON, {
+  const [search, { data }] = useLazyQuery(getPokemonBySearchTerm, {
     variables: {
       searchValue,
     },
   });
 
-  // useEffect(() => {
-  //   const getSuggestions = setTimeout(() => {
-  //     refetch();
-  //   }, 5000);
-
-  //   return () => clearTimeout(getSuggestions);
-  // }, [searchValue]);
-
-  /**
-   * Hook that alerts clicks outside of the passed ref
-   */
-  function useOutsideAlerter(ref: React.RefObject<HTMLElement>) {
-    useEffect(() => {
-      /**
-       * Alert if clicked on outside of element
-       */
-      function handleClickOutside(event: any) {
-        if (ref.current && !ref.current.contains(event.target)) {
-          setSearchValue("");
-        }
-      }
-      // Bind the event listener
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        // Unbind the event listener on clean up
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, [ref]);
+  async function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setSearchValue(e.target.value);
+    debouncedSearch();
   }
 
-  const SearchSuggestions = () => {
-    if (searchValue.length < 2) {
-      return null;
-    }
-    return (
-      <SuggestionsList ref={wrapperRef}>
-        {data?.pokemon?.slice(0, 5)?.map(
-          (
-            pokemon: {
-              name: string;
-              id: number;
-            },
-            i: number
-          ) => (
-            <li key={i}>
-              <SuggestionsLink
-                onClick={() => setSearchValue("")}
-                to={`/pokemon/${pokemon.name}/${pokemon.id}`}
-              >
-                {pokemon.name}
-              </SuggestionsLink>
-            </li>
-          )
-        )}
-      </SuggestionsList>
-    );
-  };
+  const debouncedSearch = useRef(
+    debounce(() => {
+      search();
+    }, 500)
+  ).current;
 
   return (
     <>
@@ -120,9 +67,32 @@ const Layout = () => {
               <input
                 type="text"
                 placeholder="Search for a pokemon"
-                onChange={(e) => setSearchValue(e.target.value)}
+                // onChange={(e) => setSearchValue(e.target.value)}
+                onChange={handleChange}
               />
-              <SearchSuggestions />
+              {searchValue.length >= 2 && (
+                <SuggestionsList ref={wrapperRef}>
+                  {data?.pokemon?.slice(0, 5)?.map(
+                    (
+                      pokemon: {
+                        name: string;
+                        id: number;
+                      },
+                      i: number
+                    ) => (
+                      <li key={i}>
+                        <SuggestionsLink
+                          onClick={() => setSearchValue("")}
+                          to={`/pokemon/${pokemon.name}/${pokemon.id}`}
+                        >
+                          {pokemon.name}
+                        </SuggestionsLink>
+                      </li>
+                    )
+                  )}
+                </SuggestionsList>
+              )}
+              {/* <SearchSuggestions /> */}
             </SearchInput>
           </Row>
         </Container>

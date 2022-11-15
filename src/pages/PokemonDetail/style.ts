@@ -2,19 +2,32 @@ import styled from "styled-components";
 
 export const Wrapper = styled.section`
   display: flex;
-  flex-direction: row;
-  gap: 2.5rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
   padding: 30px 0;
   width: 100%;
+  flex-wrap: wrap;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+  }
 `;
 
 export const PictureWrapper = styled.div`
   aspect-ratio: 1/1;
-  height: 375px;
+  max-width: 425px;
+  width: 100%;
   background: #e6e6e6;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media screen and (min-width: 580px) {
+    height: 425px;
+  }
 `;
 
 export const ProfilePicture = styled.img`
@@ -53,18 +66,26 @@ export const InfoBox = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  max-width: 430px;
+  margin: 0 auto;
 
   > div {
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
+
+  @media screen and (min-width: 581px) {
+    max-width: 430px;
+    width: 100%;
+  }
+
+  @media screen and (min-width: 768px) {
+    margin-left: 0;
+  }
 `;
 
 export const Label = styled.div`
   display: flex;
-  color: white;
   font-weight: bold;
 `;
 
@@ -77,5 +98,18 @@ export const Info = styled.div`
     color: #212121;
     font-weight: bold;
     text-transform: capitalize;
+  }
+`;
+
+export const TypeList = styled.ul`
+  padding-left: 0;
+  margin: 0;
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  list-style-type: none;
+
+  li {
+    display: flex;
   }
 `;

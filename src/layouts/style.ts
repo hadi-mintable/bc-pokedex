@@ -19,6 +19,7 @@ export const Header = styled.header`
   width: 100%;
   color: white;
   background-color: rgb(18, 29, 51);
+  display: flex;
 `;
 
 export const Main = styled.main`
@@ -50,11 +51,11 @@ export const SearchInput = styled.div`
   color: rgb(18, 21, 21);
   border-radius: 0.5rem;
   gap: 0.75rem;
-  display: flex;
   align-items: center;
   padding-inline-start: 0.75rem;
   min-width: 250px;
   position: relative;
+  display: none;
 
   input {
     padding: 0.625rem 0.75rem 0.625rem 0px;
@@ -66,6 +67,10 @@ export const SearchInput = styled.div`
     border: 0;
     background-color: transparent;
     outline: 0;
+  }
+
+  @media screen and (min-width: 581px) {
+    display: flex;
   }
 `;
 
@@ -106,6 +111,6 @@ export const SuggestionsLink = styled(Link)`
   text-decoration: none;
   font-size: 0.875rem;
   color: #212121;
-  padding: 0.5rem 0.75rem;
+  padding: 0.625rem 0.75rem;
   display: block;
 `;

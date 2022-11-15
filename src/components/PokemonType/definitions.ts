@@ -12,6 +12,9 @@ export type Types =
   | "rock"
   | "ground";
 
+export type Sizes = "sm" | "md";
+
 export type PokemonTypeProps = {
   type: Types;
+  size?: Sizes;
 };

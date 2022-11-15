@@ -19,13 +19,16 @@ const PokeCard: React.FC<PokeCardProps> = ({ pokemon }) => {
 
   const types = pokemon?.pokemon_type;
 
+  const fallbackImage =
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/512px-Pok%C3%A9_Ball_icon.svg.png";
+
   return (
     <LinkToPokeDetail
       to={`pokemon/${pokemon?.name}/${pokemon?.pokemon_species_id}`}
     >
       <PokeCardWrapper>
         <ImgWrapper>
-          <Image src={image} alt={pokemon?.name} />
+          <Image src={image || fallbackImage} alt={pokemon?.name} />
         </ImgWrapper>
         <Detail>
           <PokemonId>

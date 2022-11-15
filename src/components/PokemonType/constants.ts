@@ -1,4 +1,16 @@
-import { Types } from "./definitions";
+import { Types, Sizes } from "./definitions";
+
+export const sizeStyle: { [key in Sizes]: string } = {
+  sm: `
+    font-size: 0.75rem;
+    line-height: 18px;
+  `,
+  md: `
+  font-size: 1rem;
+  padding: 0.5rem;
+  min-width: 105px;
+  `,
+};
 
 export const typeStyle: { [key in Types]: string } = {
   fire: `

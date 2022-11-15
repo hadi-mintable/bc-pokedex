@@ -25,6 +25,11 @@ export const ImgWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 580px) {
+    height: auto;
+    width: 100%;
+  }
 `;
 
 export const LinkToPokeDetail = styled(Link)`
@@ -36,6 +41,10 @@ export const LinkToPokeDetail = styled(Link)`
   &:hover {
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
       0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
+
+  @media screen and (max-width: 580px) {
+    width: 100%;
   }
 `;
 
