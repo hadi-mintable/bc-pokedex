@@ -114,3 +114,31 @@ export const SuggestionsLink = styled(Link)`
   padding: 0.625rem 0.75rem;
   display: block;
 `;
+
+export const AddPokemonBtn = styled.button`
+  background-color: #30a7bd;
+  color: white;
+  border: 1px solid transparent;
+  font-weight: bold;
+  font-size: 0.875rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  height: 40px;
+`;
+
+export const ActionsAside = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
+export const PageLink = styled(Link)`
+  color: white;
+  font-weight: bold;
+  font-size: 0.875rem;
+  // text-decoration: none;
+  position: relative;
+  top: 2px;
+`;

@@ -16,6 +16,7 @@ import {
 import LoadingProfilePicture from "../../components/Skeletons/LoadingProfilePicture";
 import LoadingDetailBox from "../../components/Skeletons/LoadingDetailBox";
 import PokemonType from "../../components/PokemonType";
+import MeowthImage from "../../assets/images/meowth.png";
 
 // description: pokemon_v2_characteristic(where: {id: {_eq: ${id}}}) {
 //       pokemon_v2_characteristicdescriptions(where: {language_id: {_eq: 9}}) {
@@ -53,7 +54,26 @@ const PokemonDetail = () => {
 
   const { loading, error, data } = useQuery(GET_POKEMON_BY_ID);
 
-  if (error) return <p>Error :(</p>;
+  if (error)
+    return (
+      <Wrapper>
+        <PictureWrapper>
+          <ProfilePicture src={MeowthImage} />
+        </PictureWrapper>
+        <div>
+          <Title>
+            errormon
+            <Index> #404</Index>
+          </Title>
+          <Stats>
+            <Description>
+              Uh oh! This isn't actually pokemon #404. It appears you are facing
+              an error. Please try to refresh the page.
+            </Description>
+          </Stats>
+        </div>
+      </Wrapper>
+    );
 
   console.log(data?.pokemon[0]?.pokemon_type);
 
@@ -120,9 +140,8 @@ const PokemonDetail = () => {
                   <TypeList>
                     {data?.pokemon[0]?.pokemon_type?.map(
                       (type: any, i: number) => (
-                        <li>
+                        <li key={i}>
                           <PokemonType
-                            key={i}
                             type={type?.pokemon_v2_type?.name}
                             size="md"
                           />
