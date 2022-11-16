@@ -12,21 +12,23 @@ import {
   Label,
   Info,
   TypeList,
+  DetailWrapper,
 } from "./style";
 import LoadingProfilePicture from "../../components/Skeletons/LoadingProfilePicture";
 import LoadingDetailBox from "../../components/Skeletons/LoadingDetailBox";
 import PokemonType from "../../components/PokemonType";
-import MeowthImage from "../../assets/images/meowth.png";
-
-// description: pokemon_v2_characteristic(where: {id: {_eq: ${id}}}) {
-//       pokemon_v2_characteristicdescriptions(where: {language_id: {_eq: 9}}) {
-//         description
-//         language_id
-//       }
-//     }
+import Error from "./Error";
+import useGetPokemonDetail from "../../hooks/useGetPokemonDetail";
 
 const PokemonDetail = () => {
   let { id, pokemon } = useParams();
+
+  const { data: pokemonDetail, isLoading } = useGetPokemonDetail(id as string);
+
+  const descriptionArr = pokemonDetail?.descriptions?.filter(
+    (desc: any) => desc?.language?.name === "en"
+  );
+  const description = descriptionArr?.[0]?.description;
 
   const GET_POKEMON_BY_ID = gql`
     query GetPokemonById {
@@ -54,28 +56,7 @@ const PokemonDetail = () => {
 
   const { loading, error, data } = useQuery(GET_POKEMON_BY_ID);
 
-  if (error)
-    return (
-      <Wrapper>
-        <PictureWrapper>
-          <ProfilePicture src={MeowthImage} />
-        </PictureWrapper>
-        <div>
-          <Title>
-            errormon
-            <Index> #404</Index>
-          </Title>
-          <Stats>
-            <Description>
-              Uh oh! This isn't actually pokemon #404. It appears you are facing
-              an error. Please try to refresh the page.
-            </Description>
-          </Stats>
-        </div>
-      </Wrapper>
-    );
-
-  console.log(data?.pokemon[0]?.pokemon_type);
+  if (error) return <Error />;
 
   const image = data
     ? JSON.parse(data?.pokemon?.[0]?.pokemon_v2_pokemonsprites?.[0]?.sprites)
@@ -84,7 +65,7 @@ const PokemonDetail = () => {
 
   return (
     <Wrapper>
-      {loading ? (
+      {loading || isLoading ? (
         <>
           <LoadingProfilePicture />
           <LoadingDetailBox />
@@ -94,16 +75,15 @@ const PokemonDetail = () => {
           <PictureWrapper>
             <ProfilePicture src={image} />
           </PictureWrapper>
-          <div>
+          <DetailWrapper>
             <Title>
               {pokemon}{" "}
               <Index>#{("000" + data?.pokemon?.[0]?.id).substr(-3)}</Index>
             </Title>
             <Stats>
-              <Description>
-                When the bulb on its back grows large, it appears to lose the
-                ability to stand on its hind legs.
-              </Description>
+              {description && (
+                <Description>{descriptionArr?.[0]?.description}</Description>
+              )}
               <InfoBox>
                 <div>
                   {data?.pokemon?.[0]?.height && (
@@ -152,7 +132,7 @@ const PokemonDetail = () => {
                 </div>
               )}
             </Stats>
-          </div>
+          </DetailWrapper>
         </>
       )}
     </Wrapper>

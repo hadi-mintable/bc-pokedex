@@ -15,7 +15,9 @@ I bootstrapped this project using [Create React App](https://github.com/facebook
 - I like writing css natively - it's semantic and meaningful
 - Styling does not bloat the JSX
 
-## My approach
+## What I would do differently
+
+- During the course of development, I faced some obstacles while trying to retrieve the `description` value for each pokemon using the [GraphQL version](https://beta.pokeapi.co/graphql/console/) of the PokeAPI. Turns out it was in beta and description for most pokemon haven't been populated yet.
 
 ## Available Scripts
 

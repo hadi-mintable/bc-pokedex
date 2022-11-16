@@ -69,7 +69,7 @@ export const SearchInput = styled.div`
     outline: 0;
   }
 
-  @media screen and (min-width: 581px) {
+  @media screen and (min-width: 768px) {
     display: flex;
   }
 `;
@@ -126,6 +126,11 @@ export const AddPokemonBtn = styled.button`
   border-radius: 0.5rem;
   cursor: pointer;
   height: 40px;
+  display: none;
+
+  @media screen and (min-width: 768px) {
+    display: block;
+  }
 `;
 
 export const ActionsAside = styled.div`

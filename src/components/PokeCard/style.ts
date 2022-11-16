@@ -15,12 +15,12 @@ export const Title = styled.h2`
 
 export const Image = styled.img`
   object-fit: cover;
-  height: 180px;
+  width: 180px;
 `;
 
 export const ImgWrapper = styled.div`
   aspect-ratio: 1/1;
-  height: 300px;
+  width: 100%;
   background: #e6e6e6;
   display: flex;
   justify-content: center;
@@ -37,6 +37,7 @@ export const LinkToPokeDetail = styled(Link)`
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   overflow: hidden;
   border-radius: 6px;
+  width: 100%;
 
   &:hover {
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),

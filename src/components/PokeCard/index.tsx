@@ -22,18 +22,22 @@ const PokeCard: React.FC<PokeCardProps> = ({ pokemon }) => {
   const fallbackImage =
     "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/512px-Pok%C3%A9_Ball_icon.svg.png";
 
+  const speciesId = pokemon?.pokemon_species_id;
+  const pokemonId =
+    speciesId?.toString().length > 3
+      ? speciesId
+      : String(speciesId).padStart(4, "0");
+
   return (
     <LinkToPokeDetail
-      to={`pokemon/${pokemon?.name}/${pokemon?.pokemon_species_id}`}
+      to={`/pokemon/${pokemon?.name}/${pokemon?.pokemon_species_id}`}
     >
       <PokeCardWrapper>
         <ImgWrapper>
           <Image src={image || fallbackImage} alt={pokemon?.name} />
         </ImgWrapper>
         <Detail>
-          <PokemonId>
-            #{("000" + pokemon?.pokemon_species_id).substr(-3)}
-          </PokemonId>
+          <PokemonId>#{pokemonId}</PokemonId>
           <Title>{pokemon?.name}</Title>
           {types && (
             <TypeList>

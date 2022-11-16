@@ -24,6 +24,7 @@ export const PictureWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 0.5rem;
 
   @media screen and (min-width: 580px) {
     height: 425px;
@@ -60,26 +61,27 @@ export const Description = styled.p`
 export const InfoBox = styled.div`
   background-color: #30a7bd;
   color: #fff;
-  padding: 1.25rem;
   border-radius: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin: 0 auto;
+  width: 100%;
 
   > div {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    padding: 1.25rem;
   }
 
   @media screen and (min-width: 581px) {
-    max-width: 430px;
     width: 100%;
   }
 
   @media screen and (min-width: 768px) {
+    max-width: 430px;
     margin-left: 0;
   }
 `;
@@ -112,4 +114,8 @@ export const TypeList = styled.ul`
   li {
     display: flex;
   }
+`;
+
+export const DetailWrapper = styled.div`
+  width: 100%;
 `;

@@ -6,11 +6,11 @@ export const PokeCardWrapper = styled.div`
   flex-direction: column;
   overflow: hidden;
   border-radius: 6px;
+  width: 100%;
 `;
 
 export const ImgWrapper = styled.span`
   aspect-ratio: 1/1;
-  height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;

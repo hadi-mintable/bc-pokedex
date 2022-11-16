@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { Outlet } from "react-router-dom";
 import {
   Container,
@@ -19,8 +19,6 @@ import { useLazyQuery } from "@apollo/client";
 import { debounce } from "lodash";
 import { useOutsideAlerter } from "../hooks/useOutsideAlerter";
 import getPokemonBySearchTerm from "../graphql/queries/getPokemonBySearchTerm";
-import { db } from "../firebase";
-import { ref, onValue } from "firebase/database";
 import AddPokemonFormModal from "../components/AddPokemonFormModal";
 
 const Layout = () => {
@@ -28,17 +26,6 @@ const Layout = () => {
   const [isAddPokemonOpen, setIsAddPokemonOpen] = useState<boolean>(false);
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef, () => setSearchValue(""));
-
-  // reading community pokemon data
-  useEffect(() => {
-    onValue(ref(db), (snapshot) => {
-      const data = snapshot.val();
-
-      if (data) {
-        // console.log(data);
-      }
-    });
-  }, []);
 
   const [search, { data }] = useLazyQuery(getPokemonBySearchTerm, {
     variables: {
@@ -78,9 +65,9 @@ const Layout = () => {
               </h1>
             </HeaderLink>
             <ActionsAside>
-              <PageLink to="/community">Community</PageLink>
+              <PageLink to="/pokefriends">PokéFriends</PageLink>
               <AddPokemonBtn onClick={() => setIsAddPokemonOpen(true)}>
-                Add pokémon
+                Add PokéFriend
               </AddPokemonBtn>
               <SearchInput>
                 <svg height="19" viewBox="0 0 18 19" width="18">

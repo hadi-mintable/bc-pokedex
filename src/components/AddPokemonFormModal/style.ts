@@ -28,9 +28,11 @@ export const ModalBody = styled.div`
   align-items: start;
   gap: 1rem;
   position: relative;
+  max-height: 461px;
+  height: 100%;
 `;
 
-export const SubmitBtn = styled.input`
+export const SubmitBtn = styled.button`
   background-color: #30a7bd;
   color: white;
   border: 1px solid transparent;
@@ -45,6 +47,10 @@ export const SubmitBtn = styled.input`
   align-items: center;
   min-width: 100px;
   justify-content: center;
+
+  img {
+    height: 10px;
+  }
 `;
 
 export const Title = styled.h1`
@@ -72,13 +78,18 @@ export const Fieldset = styled.div`
   }
 
   input[type="text"],
-  input[type="number"] {
+  input[type="number"],
+  select {
     background-color: transparent;
     border: 1px solid white;
     padding: 0.625rem 0.75rem;
     border-radius: 0.5rem;
     color: white;
     font-weight: bold;
+  }
+
+  select option {
+    text-transform: capitalize;
   }
 `;
 
@@ -99,4 +110,18 @@ export const CloseBtn = styled.button`
   right: 1.5rem;
   top: 1.5rem;
   cursor: pointer;
+`;
+
+export const SuccessTitle = styled.h1`
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+
+  img {
+    height: 100px;
+    aspect-ratio: 1/1;
+  }
 `;
