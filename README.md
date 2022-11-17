@@ -40,8 +40,10 @@ I bootstrapped this project using [Create React App](https://github.com/facebook
 
 ## To run this project locally
 
-In the project directory, run:
+`cd` to the project directory and run `npm install` or `yarn install`, whichever you prefer.
 
-### `npm start`
+Once `node_modules` are installed...
+
+### `npm start` or `yarn start`
 
 Launches the app in [http://localhost:3000](http://localhost:3000) (or another port if you have an active port running).
