@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { shine } from "../style";
+import { shine } from "@components/Skeletons/style";
 
 export const PokeCardWrapper = styled.div`
   display: flex;

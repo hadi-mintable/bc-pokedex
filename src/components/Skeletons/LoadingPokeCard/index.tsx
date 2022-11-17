@@ -1,5 +1,5 @@
 import { PokeCardWrapper, ImgWrapper, Detail } from "./style";
-import { TextShine } from "../style";
+import { TextShine } from "@components/Skeletons/style";
 
 const LoadingPokeCard = () => {
   return (

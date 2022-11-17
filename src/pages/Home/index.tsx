@@ -1,36 +1,22 @@
 import { useState } from "react";
-import PokeCard from "../../components/PokeCard";
-import { LoadingPokeCards } from "../../components/Skeletons";
-import { useQuery, gql } from "@apollo/client";
+import PokeCard from "@components/PokeCard";
+import { LoadingPokeCards } from "@components/Skeletons";
+import { useQuery } from "@apollo/client";
 import Pagination from "rc-pagination";
 import "rc-pagination/assets/index.css";
 import { List, Wrapper, PaginationWrapper } from "./style";
+import { paginationLocale } from "./constants";
+import getAllPokemon from "@graphql/queries/getAllPokemon";
 
 const Home = () => {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const itemsPerPage = 12;
 
-  const GET_ALL_POKEMON = gql`
-    query GetAllPokemon {
-      all_pokemon: pokemon_v2_pokemon(limit: 12, offset: ${
-        currentPage * itemsPerPage
-      }) {
-        id
-        name
-        pokemon_species_id
-        pokemon_sprites: pokemon_v2_pokemonsprites {
-          sprites
-        }
-        pokemon_type: pokemon_v2_pokemontypes {
-          pokemon_v2_type {
-            name
-          }
-        }
-      }
-    }
-  `;
-
-  const { loading, error, data } = useQuery(GET_ALL_POKEMON);
+  const { loading, error, data } = useQuery(getAllPokemon, {
+    variables: {
+      offset: currentPage * itemsPerPage,
+    },
+  });
 
   if (error) return <p>Error :(</p>;
 
@@ -62,22 +48,7 @@ const Home = () => {
                 window.scrollTo(0, 0);
               }}
               showQuickJumper={true}
-              locale={{
-                // Options.jsx
-                items_per_page: "/ page",
-                jump_to: "Go to",
-                jump_to_confirm: "confirm",
-                page: "Page",
-
-                // Pagination.jsx
-                prev_page: "Previous Page",
-                next_page: "Next Page",
-                prev_5: "Previous 5 Pages",
-                next_5: "Next 5 Pages",
-                prev_3: "Previous 3 Pages",
-                next_3: "Next 3 Pages",
-                // page_size: "Page Size",
-              }}
+              locale={paginationLocale}
             />
           </PaginationWrapper>
         </>

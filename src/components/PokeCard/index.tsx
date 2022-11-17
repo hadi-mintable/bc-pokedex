@@ -1,5 +1,5 @@
 import { PokeCardProps } from "./definitions";
-import PokemonType from "../PokemonType";
+import PokemonType from "@components/PokemonType";
 import {
   PokeCardWrapper,
   Title,

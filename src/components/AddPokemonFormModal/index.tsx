@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AddPokemonFormModalProps, FormInputs } from "./definitions";
-import { Types as PokemonTypes } from "../PokemonType/definitions";
+import { Types as PokemonTypes } from "@components/PokemonType/definitions";
 import {
   ModalWrapper,
   ModalBody,
@@ -15,8 +15,8 @@ import { useForm } from "react-hook-form";
 import { uid } from "uid";
 import { set, ref } from "firebase/database";
 import { db } from "../../firebase";
-import useUploadImageToFirebase from "../../hooks/useUploadImageToFirebase";
-import Loader from "../../assets/images/three-dots.svg";
+import useUploadImageToFirebase from "@hooks/useUploadImageToFirebase";
+import Loader from "@assets/images/three-dots.svg";
 
 const AddPokemonFormModal: React.FC<AddPokemonFormModalProps> = ({
   isOpen,

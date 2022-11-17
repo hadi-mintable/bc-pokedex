@@ -1,4 +1,4 @@
-import { Types } from "../PokemonType/definitions";
+import { Types } from "@components/PokemonType/definitions";
 
 export interface PokeCardProps {
   pokemon: {

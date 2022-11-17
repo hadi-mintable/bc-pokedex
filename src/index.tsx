@@ -7,22 +7,8 @@ import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "./ApolloClient/client";
-// import { initializeApp } from "firebase/app";
-
-// const firebaseConfig = {
-//   apiKey: "AIzaSyCiu-g96oLKnAmZ9e1HHQFQzwEHC6eMfTo",
-//   authDomain: "bc-pokedex.firebaseapp.com",
-//   projectId: "bc-pokedex",
-//   storageBucket: "bc-pokedex.appspot.com",
-//   messagingSenderId: "420166589213",
-//   appId: "1:420166589213:web:39860992857bf551c3dff4",
-//   measurementId: "G-NT5BT4B6ZS",
-// };
 
 const queryClient = new QueryClient();
-// const firebaseApp = initializeApp(firebaseConfig);
-
-// console.log(firebaseApp);
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

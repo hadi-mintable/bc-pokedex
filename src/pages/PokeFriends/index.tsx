@@ -1,8 +1,8 @@
-import PokeCard from "../../components/PokeCard";
-import { LoadingPokeCards } from "../../components/Skeletons";
-import { List, Wrapper } from "../Home/style";
 import { useEffect, useState } from "react";
-import { db } from "src/firebase";
+import PokeCard from "@components/PokeCard";
+import { LoadingPokeCards } from "@components/Skeletons";
+import { List, Wrapper } from "@pages/Home/style";
+import { db } from "../../firebase";
 import { ref, onValue } from "firebase/database";
 
 const PokeFriends = () => {
@@ -10,7 +10,7 @@ const PokeFriends = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [pokeFriendsData, setPokeFriendsData] = useState<any>({});
 
-  // reading community pokemon data
+  // reading pokefriends data
   useEffect(() => {
     setIsLoading(true);
 

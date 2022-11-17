@@ -1,5 +1,5 @@
 import { DetailBox } from "./style";
-import { TextShine } from "../style";
+import { TextShine } from "@components/Skeletons/style";
 
 const LoadingDetailBox = () => {
   return (

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { shine } from "../style";
+import { shine } from "@components/Skeletons/style";
 
 export const ImgWrapper = styled.span`
   aspect-ratio: 1/1;

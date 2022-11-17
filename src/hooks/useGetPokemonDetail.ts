@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { POKEMON_DETAIL_REST_ENDPOINT } from "../constants/config";
+import { POKEMON_DETAIL_REST_ENDPOINT } from "@constants/config";
 
 const useGetPokemonDetail = (id: string) => {
   return useQuery(

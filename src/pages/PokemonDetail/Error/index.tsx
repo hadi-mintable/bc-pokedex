@@ -6,8 +6,8 @@ import {
   Stats,
   Description,
   Index,
-} from "../style";
-import MeowthImage from "../../../assets/images/meowth.png";
+} from "@pages/PokemonDetail/style";
+import MeowthImage from "@assets/images/meowth.png";
 
 const Error = () => {
   return (

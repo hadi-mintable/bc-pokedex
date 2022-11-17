@@ -17,9 +17,9 @@ import {
 } from "./style";
 import { useLazyQuery } from "@apollo/client";
 import { debounce } from "lodash";
-import { useOutsideAlerter } from "../hooks/useOutsideAlerter";
-import getPokemonBySearchTerm from "../graphql/queries/getPokemonBySearchTerm";
-import AddPokemonFormModal from "../components/AddPokemonFormModal";
+import { useOutsideAlerter } from "@hooks/useOutsideAlerter";
+import getPokemonBySearchTerm from "@graphql/queries/getPokemonBySearchTerm";
+import AddPokemonFormModal from "@components/AddPokemonFormModal";
 
 const Layout = () => {
   const [searchValue, setSearchValue] = useState<string>("");

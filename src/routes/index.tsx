@@ -1,8 +1,8 @@
 import { Routes as BrowserRoutes, Route, useLocation } from "react-router-dom";
-import Home from "../pages/Home";
-import PokeFriends from "../pages/PokeFriends";
-import PokemonDetail from "../pages/PokemonDetail";
-import Layout from "../layouts";
+import Home from "@pages/Home";
+import PokeFriends from "@pages/PokeFriends";
+import PokemonDetail from "@pages/PokemonDetail";
+import Layout from "@layouts/index";
 import React, { useLayoutEffect } from "react";
 
 const Routes = () => {

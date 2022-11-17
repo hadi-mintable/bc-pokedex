@@ -14,11 +14,11 @@ import {
   TypeList,
   DetailWrapper,
 } from "./style";
-import LoadingProfilePicture from "../../components/Skeletons/LoadingProfilePicture";
-import LoadingDetailBox from "../../components/Skeletons/LoadingDetailBox";
-import PokemonType from "../../components/PokemonType";
+import LoadingProfilePicture from "@components/Skeletons/LoadingProfilePicture";
+import LoadingDetailBox from "@components/Skeletons/LoadingDetailBox";
+import PokemonType from "@components/PokemonType";
 import Error from "./Error";
-import useGetPokemonDetail from "../../hooks/useGetPokemonDetail";
+import useGetPokemonDetail from "@hooks/useGetPokemonDetail";
 
 const PokemonDetail = () => {
   let { id, pokemon } = useParams();
