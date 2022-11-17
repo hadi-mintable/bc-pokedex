@@ -7,13 +7,13 @@ import {
   Description,
   Index,
 } from "@pages/PokemonDetail/style";
-import MeowthImage from "@assets/images/meowth.png";
+import PsyduckImg from "@assets/images/psyduck.png";
 
 const Error = () => {
   return (
     <Wrapper>
       <PictureWrapper>
-        <ProfilePicture src={MeowthImage} />
+        <ProfilePicture src={PsyduckImg} />
       </PictureWrapper>
       <div>
         <Title>

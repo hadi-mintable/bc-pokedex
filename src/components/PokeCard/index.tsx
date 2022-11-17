@@ -1,5 +1,6 @@
 import { PokeCardProps } from "./definitions";
 import PokemonType from "@components/PokemonType";
+import { FALLBACK_IMAGE } from "@constants/config";
 import {
   PokeCardWrapper,
   Title,
@@ -12,15 +13,12 @@ import {
   TypeEach,
 } from "./style";
 
-const PokeCard: React.FC<PokeCardProps> = ({ pokemon }) => {
+const PokeCard: React.FC<PokeCardProps> = ({ pokemon, isPokeFriend }) => {
   const image = JSON.parse(
     pokemon?.pokemon_sprites?.[0]?.sprites
   ).front_default;
 
   const types = pokemon?.pokemon_type;
-
-  const fallbackImage =
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/512px-Pok%C3%A9_Ball_icon.svg.png";
 
   const speciesId = pokemon?.pokemon_species_id;
   const pokemonId =
@@ -30,11 +28,15 @@ const PokeCard: React.FC<PokeCardProps> = ({ pokemon }) => {
 
   return (
     <LinkToPokeDetail
-      to={`/pokemon/${pokemon?.name}/${pokemon?.pokemon_species_id}`}
+      to={
+        isPokeFriend
+          ? null
+          : `/pokemon/${pokemon?.name}/${pokemon?.pokemon_species_id}`
+      }
     >
       <PokeCardWrapper>
         <ImgWrapper>
-          <Image src={image || fallbackImage} alt={pokemon?.name} />
+          <Image src={image || FALLBACK_IMAGE} alt={pokemon?.name} />
         </ImgWrapper>
         <Detail>
           <PokemonId>#{pokemonId}</PokemonId>

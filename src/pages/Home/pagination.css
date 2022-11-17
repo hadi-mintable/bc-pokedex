@@ -1,0 +1,9 @@
+.rc-pagination-total-text {
+  display: block;
+}
+
+@media screen and (min-width: 581px) {
+  .rc-pagination-total-text {
+    display: inline-block;
+  }
+}

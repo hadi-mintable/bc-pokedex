@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AddPokemonFormModalProps, FormInputs } from "./definitions";
+import { AddPokemonFormModalProps, FormInputs, FormData } from "./definitions";
 import { Types as PokemonTypes } from "@components/PokemonType/definitions";
 import {
   ModalWrapper,
@@ -12,10 +12,8 @@ import {
   SuccessTitle,
 } from "./style";
 import { useForm } from "react-hook-form";
-import { uid } from "uid";
-import { set, ref } from "firebase/database";
-import { db } from "../../firebase";
 import useUploadImageToFirebase from "@hooks/useUploadImageToFirebase";
+import useAddPokeFriend from "@hooks/useAddPokeFriend";
 import Loader from "@assets/images/three-dots.svg";
 
 const AddPokemonFormModal: React.FC<AddPokemonFormModalProps> = ({
@@ -28,37 +26,13 @@ const AddPokemonFormModal: React.FC<AddPokemonFormModalProps> = ({
     useState<boolean>(false);
 
   const handleUpload = useUploadImageToFirebase();
+  const addPokeFriend = useAddPokeFriend();
 
-  const addPokemon = async (data: any) => {
+  const addPokemon = async (data: FormData) => {
     setIsLoading(true);
-    const uuid = uid();
-    const id = `com-${uuid}`;
 
     const imageURL = await handleUpload({ file: data?.image?.item(0) });
-
-    await set(ref(db, `/${id}`), {
-      pokemon: {
-        id,
-        name: data?.name,
-        pokemon_species_id: id,
-        height: data?.height,
-        weight: data?.weight,
-        pokemon_sprites: [
-          {
-            sprites: JSON.stringify({
-              front_default: imageURL,
-            }),
-          },
-        ],
-        pokemon_type: [
-          {
-            pokemon_v2_type: {
-              name: data?.type,
-            },
-          },
-        ],
-      },
-    });
+    await addPokeFriend({ data, imageURL });
 
     setIsAddPokefriendSuccess(true);
   };
@@ -122,11 +96,13 @@ const AddPokemonFormModal: React.FC<AddPokemonFormModalProps> = ({
               <Fieldset>
                 <label>Type</label>
                 <select {...register(FormInputs.TYPE)}>
-                  {Object.keys(PokemonTypes)?.map((type: any, i: number) => (
-                    <option key={i} value={type}>
-                      {type}
-                    </option>
-                  ))}
+                  {Object.keys(PokemonTypes)?.map(
+                    (type: PokemonTypes, i: number) => (
+                      <option key={i} value={type}>
+                        {type}
+                      </option>
+                    )
+                  )}
                 </select>
               </Fieldset>
               <SubmitBtn type="submit" title="Submit">

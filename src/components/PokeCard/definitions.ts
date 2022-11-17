@@ -1,20 +1,6 @@
-import { Types } from "@components/PokemonType/definitions";
+import { PokemonListing } from "@constants/definitions";
 
 export interface PokeCardProps {
-  pokemon: {
-    name: string;
-    pokemon_species_id: number;
-    pokemon_sprites: [
-      {
-        sprites: string;
-      }
-    ];
-    pokemon_type: [
-      {
-        pokemon_v2_type: {
-          name: Types;
-        };
-      }
-    ];
-  };
+  isPokeFriend?: boolean;
+  pokemon: PokemonListing;
 }

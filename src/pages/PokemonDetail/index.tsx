@@ -1,4 +1,4 @@
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import {
   Wrapper,
@@ -17,6 +17,7 @@ import {
 import LoadingProfilePicture from "@components/Skeletons/LoadingProfilePicture";
 import LoadingDetailBox from "@components/Skeletons/LoadingDetailBox";
 import PokemonType from "@components/PokemonType";
+import getPokemonById from "@graphql/queries/getPokemonById";
 import Error from "./Error";
 import useGetPokemonDetail from "@hooks/useGetPokemonDetail";
 
@@ -26,42 +27,23 @@ const PokemonDetail = () => {
   const { data: pokemonDetail, isLoading } = useGetPokemonDetail(id as string);
 
   const descriptionArr = pokemonDetail?.descriptions?.filter(
-    (desc: any) => desc?.language?.name === "en"
+    (desc) => desc?.language?.name === "en"
   );
+
   const description = descriptionArr?.[0]?.description;
 
-  const GET_POKEMON_BY_ID = gql`
-    query GetPokemonById {
-      pokemon: pokemon_v2_pokemon(where: {id: {_eq: ${id}}}) {
-        id
-        name
-        height
-        weight
-        pokemon_v2_pokemonsprites {
-          sprites
-        }
-        pokemon_type: pokemon_v2_pokemontypes {
-          pokemon_v2_type {
-            name
-          }
-        }
-        abilities: pokemon_v2_pokemonabilities {
-          ability: pokemon_v2_ability {
-            name
-          }
-        }
-      }
-    }
-  `;
-
-  const { loading, error, data } = useQuery(GET_POKEMON_BY_ID);
-
-  if (error) return <Error />;
+  const { loading, error, data } = useQuery(getPokemonById, {
+    variables: {
+      id: +id,
+    },
+  });
 
   const image = data
     ? JSON.parse(data?.pokemon?.[0]?.pokemon_v2_pokemonsprites?.[0]?.sprites)
         ?.front_default
     : "";
+
+  if (error) return <Error />;
 
   return (
     <Wrapper>
@@ -104,7 +86,7 @@ const PokemonDetail = () => {
                     <Info>
                       <Label>Abilities</Label>
                       {data?.pokemon?.[0]?.abilities?.map(
-                        (ability: any, i: number) => (
+                        (ability, i: number) => (
                           <span key={i}>
                             {ability?.ability?.name?.replace("-", " ")}
                           </span>
@@ -118,16 +100,14 @@ const PokemonDetail = () => {
                 <div>
                   <Label>Type</Label>
                   <TypeList>
-                    {data?.pokemon[0]?.pokemon_type?.map(
-                      (type: any, i: number) => (
-                        <li key={i}>
-                          <PokemonType
-                            type={type?.pokemon_v2_type?.name}
-                            size="md"
-                          />
-                        </li>
-                      )
-                    )}
+                    {data?.pokemon[0]?.pokemon_type?.map((type, i) => (
+                      <li key={i}>
+                        <PokemonType
+                          type={type?.pokemon_v2_type?.name}
+                          size="md"
+                        />
+                      </li>
+                    ))}
                   </TypeList>
                 </div>
               )}

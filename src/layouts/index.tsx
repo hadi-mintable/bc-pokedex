@@ -81,7 +81,6 @@ const Layout = () => {
                 <input
                   type="text"
                   placeholder="Search for a pokémon"
-                  // onChange={(e) => setSearchValue(e.target.value)}
                   onChange={handleChange}
                 />
                 {searchValue.length >= 2 && (

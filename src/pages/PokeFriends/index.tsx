@@ -4,11 +4,12 @@ import { LoadingPokeCards } from "@components/Skeletons";
 import { List, Wrapper } from "@pages/Home/style";
 import { db } from "../../firebase";
 import { ref, onValue } from "firebase/database";
+import Error from "@pages/Home/Error";
 
 const PokeFriends = () => {
   const itemsPerPage = 12;
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [pokeFriendsData, setPokeFriendsData] = useState<any>({});
+  const [pokeFriendsData, setPokeFriendsData] = useState<any>([]);
 
   // reading pokefriends data
   useEffect(() => {
@@ -16,11 +17,14 @@ const PokeFriends = () => {
 
     onValue(ref(db), (snapshot) => {
       const data = snapshot.val();
+      setIsLoading(false);
 
-      if (data) {
-        setIsLoading(false);
-        setPokeFriendsData(data);
+      if (!data) {
+        setPokeFriendsData([]);
+        return;
       }
+
+      setPokeFriendsData(Object.entries(data));
     });
   }, []);
 
@@ -32,13 +36,19 @@ const PokeFriends = () => {
         </List>
       ) : (
         <>
-          <List>
-            {Object.entries(pokeFriendsData)?.map((pokemon: any, i: number) => (
-              <li key={i}>
-                <PokeCard pokemon={pokemon[1]?.pokemon} />
-              </li>
-            ))}
-          </List>
+          {pokeFriendsData.length ? (
+            <List>
+              {pokeFriendsData
+                ?.sort((a, b) => b[1].date_added - a[1].date_added)
+                ?.map((pokemon, i: number) => (
+                  <li key={i}>
+                    <PokeCard pokemon={pokemon[1]?.pokemon} isPokeFriend />
+                  </li>
+                ))}
+            </List>
+          ) : (
+            <Error />
+          )}
         </>
       )}
     </Wrapper>

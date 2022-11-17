@@ -7,6 +7,9 @@ import "rc-pagination/assets/index.css";
 import { List, Wrapper, PaginationWrapper } from "./style";
 import { paginationLocale } from "./constants";
 import getAllPokemon from "@graphql/queries/getAllPokemon";
+import Error from "./Error";
+import { PokemonListing } from "@constants/definitions";
+import "./pagination.css";
 
 const Home = () => {
   const [currentPage, setCurrentPage] = useState<number>(0);
@@ -18,7 +21,12 @@ const Home = () => {
     },
   });
 
-  if (error) return <p>Error :(</p>;
+  if (error)
+    return (
+      <Wrapper>
+        <Error />
+      </Wrapper>
+    );
 
   return (
     <Wrapper>
@@ -29,7 +37,7 @@ const Home = () => {
       ) : (
         <>
           <List>
-            {data?.all_pokemon?.map((pokemon: any) => (
+            {data?.all_pokemon?.map((pokemon: PokemonListing) => (
               <li key={pokemon?.id}>
                 <PokeCard pokemon={pokemon} />
               </li>

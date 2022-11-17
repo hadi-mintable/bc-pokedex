@@ -14,3 +14,11 @@ export enum FormInputs {
   IMAGE = "image",
   TYPE = "type",
 }
+
+export type FormData = {
+  name: string;
+  height?: number;
+  weight?: number;
+  image?: FileList;
+  type: string;
+};
