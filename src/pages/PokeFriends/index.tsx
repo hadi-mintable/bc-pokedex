@@ -8,7 +8,7 @@ import Error from "@pages/Home/Error";
 
 const PokeFriends = () => {
   const itemsPerPage = 12;
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [pokeFriendsData, setPokeFriendsData] = useState<any>([]);
 
   // reading pokefriends data
