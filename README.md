@@ -1,5 +1,7 @@
 # Blockchain.com pokedex clone
 
+[Live demo](https://pokefriends-clone.netlify.app/)
+
 I grew up watching Pokemon and stopped right after the first 150 (or 151 if you believe in Mewtwo) so this was really fun to build and brought back loads of memories. But that aside...
 
 I bootstrapped this project using [Create React App](https://github.com/facebook/create-react-app) with Typescript, along with the following packages/tools:
@@ -7,7 +9,7 @@ I bootstrapped this project using [Create React App](https://github.com/facebook
 ### Retrieving data: Apollo GraphQL and react-query
 
 - I was familiar with [tanstack's react-query](https://tanstack.com/query/v4/?from=reactQueryV3&original=https://react-query-v3.tanstack.com/), so aside from the magic that came with declarative querying, I love that it manages loading, fetching and error states for API calls
-- Handling the different states helps me build intentional and sympathetic UI for end users.
+- Handling the different states helps me build intentional and sympathetic UI for end users
 
 ### styled-components
 
@@ -33,17 +35,17 @@ I bootstrapped this project using [Create React App](https://github.com/facebook
 - Given more time, I would add the following features:
 
   - a back button in pokedetail pages
-  - breadcrumbs for each page to indicate how far in the information architecture the user is in
+  - breadcrumbs for each page to indicate how far along in the information architecture the user is
   - filtering pokemon by type in listing
   - mobile menu for showing search and "Add PokéFriends" feature
   - add validation for required fields for Adding PokéFriends form
 
 ## To run this project locally
 
-`cd` to the project directory and run `npm install` or `yarn install`, whichever you prefer.
+`cd` to the project directory and run `npm install`
 
 Once `node_modules` are installed...
 
-### `npm start` or `yarn start`
+### `npm run start`
 
 Launches the app in [http://localhost:3000](http://localhost:3000) (or another port if you have an active port running).
