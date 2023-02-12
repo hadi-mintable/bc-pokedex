@@ -1,6 +1,6 @@
 # Blockchain.com pokedex clone
 
-[Live demo](https://pokefriends-clone.netlify.app/)
+[Live demo](https://pokedex.leeshuzheng.io/)
 
 I grew up watching Pokemon and stopped right after the first 150 (or 151 if you believe in Mewtwo) so this was really fun to build and brought back loads of memories. But that aside...
 
