@@ -20,6 +20,7 @@ import PokemonType from "@components/PokemonType";
 import getPokemonById from "@graphql/queries/getPokemonById";
 import Error from "./Error";
 import useGetPokemonDetail from "@hooks/useGetPokemonDetail";
+import useGetPokemonImage from "@hooks/useGetPokemonImage";
 
 const PokemonDetail = () => {
   let { id, pokemon } = useParams();
@@ -38,10 +39,7 @@ const PokemonDetail = () => {
     },
   });
 
-  const image = data
-    ? JSON.parse(data?.pokemon?.[0]?.pokemon_v2_pokemonsprites?.[0]?.sprites)
-        ?.front_default
-    : "";
+  const image = useGetPokemonImage(id);
 
   if (error) return <Error />;
 

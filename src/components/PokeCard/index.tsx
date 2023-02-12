@@ -1,6 +1,7 @@
 import { PokeCardProps } from "./definitions";
 import PokemonType from "@components/PokemonType";
 import { FALLBACK_IMAGE } from "@constants/config";
+import useGetPokemonImage from "@hooks/useGetPokemonImage";
 import {
   PokeCardWrapper,
   Title,
@@ -14,15 +15,11 @@ import {
 } from "./style";
 
 const PokeCard: React.FC<PokeCardProps> = ({ pokemon, isPokeFriend }) => {
-  // const image = JSON.parse(
-  //   pokemon?.pokemon_sprites?.[0]?.sprites
-  // ).front_default;
-
   const types = pokemon?.pokemon_type;
 
   const speciesId = pokemon?.pokemon_species_id;
 
-  const image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${speciesId}.png`;
+  const image = useGetPokemonImage(speciesId);
 
   const pokemonId =
     speciesId?.toString().length > 3
