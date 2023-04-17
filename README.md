@@ -1,4 +1,4 @@
-# Blockchain.com pokedex clone
+# Pokedex clone
 
 [Live demo](https://pokedex.leeshuzheng.io/)
 
@@ -13,7 +13,7 @@ I bootstrapped this project using [Create React App](https://github.com/facebook
 
 ### styled-components
 
-- In the array of options for styling components, I understand blockchain.com's team utilises styled components. I'm using this for the first time, but I intend to use this opportunity to showcase my css with this framework
+- In the array of options for styling components, I understand some teams utilise styled components. I'm using this for the first time, but I intend to use this opportunity to showcase my css with this framework
 - I like writing css natively - it's semantic and meaningful
 - Abstracting styles does not bloat the jsx/tsx files and allows reusing of modules across pages/components
 
@@ -25,20 +25,6 @@ I bootstrapped this project using [Create React App](https://github.com/facebook
 ### react-hook-form for Adding Pokéfriends form
 
 - It's one of my favourite packages to handle submitting, validating and setting up forms
-
-## What I would do differently
-
-- During the course of development, I faced some obstacles while trying to retrieve the `description` value for each pokemon using the [GraphQL version](https://beta.pokeapi.co/graphql/console/) of the PokeAPI. Turns out it was in beta and description for most pokemon hadn't been populated yet. I would have done more investigation about the available data from APIs prior to starting.
-
-- I would componentize more modules so they can be used across multiple pages (loader, error containers, title, etc)
-
-- Given more time, I would add the following features:
-
-  - a back button in pokedetail pages
-  - breadcrumbs for each page to indicate how far along in the information architecture the user is
-  - filtering pokemon by type in listing
-  - mobile menu for showing search and "Add PokéFriends" feature
-  - add validation for required fields for Adding PokéFriends form
 
 ## To run this project locally
 
