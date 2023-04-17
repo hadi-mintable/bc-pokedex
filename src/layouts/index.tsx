@@ -65,10 +65,10 @@ const Layout = () => {
               </h1>
             </HeaderLink>
             <ActionsAside>
-              <PageLink to="/pokefriends">PokéFriends</PageLink>
-              <AddPokemonBtn onClick={() => setIsAddPokemonOpen(true)}>
+              {/* <PageLink to="/pokefriends">PokéFriends</PageLink> */}
+              {/* <AddPokemonBtn onClick={() => setIsAddPokemonOpen(true)}>
                 Add PokéFriend
-              </AddPokemonBtn>
+              </AddPokemonBtn> */}
               <SearchInput>
                 <svg height="19" viewBox="0 0 18 19" width="18">
                   <path
