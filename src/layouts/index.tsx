@@ -11,9 +11,9 @@ import {
   PokeballImg,
   SuggestionsList,
   SuggestionsLink,
-  AddPokemonBtn,
+  // AddPokemonBtn,
   ActionsAside,
-  PageLink,
+  // PageLink,
 } from "./style";
 import { useLazyQuery } from "@apollo/client";
 import { debounce } from "lodash";
